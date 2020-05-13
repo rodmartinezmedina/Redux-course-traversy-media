@@ -1,4 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createPost } from '../actions/postActions';
+
+
+
 
 class PostForm extends Component {
   constructor(props) {
@@ -23,20 +29,13 @@ class PostForm extends Component {
       body: this.state.body
     }
 
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://jsonplaceholder.typicode.com/posts"; // site that doesn’t send Access-Control-*
-    
-    // https://cors-anywhere.herokuapp.com/https://example.com
-    fetch(proxyurl + url, { 
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(post)
-    })
-    .then(res => res.json())
-    .then(data =>console.log(data));
-  }
+      //we replace our fetch with this line cause now the fetch is 
+      // inside of the action file
+      this.props.createPost(post)
+    }
+  
+
+    //Call Action
 
   render() {
     return (
