@@ -2,6 +2,16 @@
   text-align: center;
 }
 
+.App h1 {
+  width: 85%;
+  margin: 30px;
+}
+
+.one-post {
+  width: 80%;
+  margin: 30px;;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 20vh;

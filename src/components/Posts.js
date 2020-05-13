@@ -15,34 +15,25 @@ class Posts extends Component {
     const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://jsonplaceholder.typicode.com/posts"; // site that doesn’t send Access-Control-*
     fetch(proxyurl + url) // https://cors-anywhere.herokuapp.com/https://example.com
-    .then(response => response.text())
-    .then(contents => console.log(contents))
+    .then(res => res.json())
+    .then(data => this.setState({ posts: data }))
+    .then(data => console.log(`data is:`, data))
     .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
   }
 
-  
-
-
-//   const testURL = 'https://jsonplaceholder.typicode.com/posts';
-// 	const myInit = {
-// 		method: 'HEAD',
-// 		mode: 'no-cors',
-// 	};
-
-// 	const myRequest = new Request(testURL, myInit);
-
-//   fetch(myRequest)
-//   .then(res => res.json())
-//   .then(data => console.log(data) )
-//   .catch( (e) => {
-// 		console.log(e);
-//   });
-// }
 
   render() {
+    const postItems = this.state.posts.map( post => (
+      <div key={post.id} className='one-post'>
+        <h3>{post.title}</h3>
+        <p>{post.body}</p>
+      </div>
+    ));
     return (
       <div>
-      <h1>Posts</h1>        
+      <h1>Posts</h1>
+      { postItems }
+    
       </div>
     )
   }
